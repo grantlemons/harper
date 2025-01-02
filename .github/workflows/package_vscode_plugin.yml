@@ -39,6 +39,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'yarn'
       - name: Build harper-ls
         uses: houseabsolute/actions-rust-cross@v0
         with:
