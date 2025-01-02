@@ -14,6 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Setup Caching
+        uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: "harper"
       - uses: extractions/setup-just@v2
       - uses: actions/setup-node@v4
         with:
