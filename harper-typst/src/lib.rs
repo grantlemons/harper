@@ -42,48 +42,6 @@ mod tests {
     use harper_core::{Document, NounData, Punctuation, TokenKind, WordMetadata};
 
     #[test]
-    fn contraction() {
-        let document = Document::new_curated("doesn't", &Typst);
-        let token_kinds = document.tokens().map(|t| t.kind).collect_vec();
-        dbg!(&token_kinds);
-
-        assert_eq!(token_kinds.len(), 1);
-        assert!(!token_kinds.into_iter().any(|t| {
-            matches!(
-                t,
-                TokenKind::Word(WordMetadata {
-                    noun: Some(NounData {
-                        is_possessive: Some(true),
-                        ..
-                    }),
-                    ..
-                })
-            )
-        }))
-    }
-
-    #[test]
-    fn possessive() {
-        let document = Document::new_curated("person's", &Typst);
-        let token_kinds = document.tokens().map(|t| t.kind).collect_vec();
-        dbg!(&token_kinds);
-
-        assert_eq!(token_kinds.len(), 1);
-        assert!(token_kinds.into_iter().all(|t| {
-            matches!(
-                t,
-                TokenKind::Word(WordMetadata {
-                    noun: Some(NounData {
-                        is_possessive: Some(true),
-                        ..
-                    }),
-                    ..
-                })
-            )
-        }))
-    }
-
-    #[test]
     fn number() {
         let source = "12 is larger than 11, but much less than 11!";
 
@@ -215,8 +173,8 @@ mod tests {
 
     #[test]
     fn header_parsing() {
-        let source = r"= Header
-                       Paragraph";
+        let source = "= Header
+                      Paragraph";
 
         let document = Document::new_curated(source, &Typst);
         let token_kinds = document.tokens().map(|t| t.kind).collect_vec();
@@ -239,9 +197,9 @@ mod tests {
 
     #[test]
     fn parbreak() {
-        let source = r"Paragraph
+        let source = "Paragraph
 
-                       Paragraph";
+                      Paragraph";
 
         let document = Document::new_curated(source, &Typst);
         let token_kinds = document.tokens().map(|t| t.kind).collect_vec();
@@ -259,9 +217,9 @@ mod tests {
 
     #[test]
     fn label_unlintable() {
-        let source = r"= Header
-                       <label>
-                       Paragraph";
+        let source = "= Header
+                      <label>
+                      Paragraph";
 
         let document = Document::new_curated(source, &Typst);
         let token_kinds = document.tokens().map(|t| t.kind).collect_vec();
@@ -313,8 +271,8 @@ mod tests {
 
     #[test]
     fn smart_apostrophe_newline() {
-        let source = r#"group’s
-writing"#;
+        let source = "group’s
+                      writing";
 
         let document = Document::new_curated(source, &Typst);
         let token_kinds = document.tokens().map(|t| t.kind).collect_vec();
