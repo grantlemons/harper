@@ -31,7 +31,7 @@
     #let count = authors.len()
     #let authors_slice = authors.slice(0, calc.min(count, 3))
     _#if count > 3 {
-        // et al. isn't parsed properly, but this isn't the fault of the typst
+        // et al. isn't parsed properly, but this isn't the fault of the Typst
         // parser
         // authors_slice.push("et al.")
         authors_slice.join(", ")
