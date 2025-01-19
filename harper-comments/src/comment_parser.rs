@@ -108,3 +108,41 @@ impl Parser for CommentParser {
         self.inner.parse(source)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use harper_core::{
+        parsers::{MarkdownOptions, StrParser},
+        TokenKind,
+    };
+
+    use super::CommentParser;
+
+    #[test]
+    fn ignores_shebangs() {
+        let source = "
+#!/bin/python3
+
+# This is a comment
+a = 1
+";
+        let python_parser =
+            CommentParser::new_from_language_id("python", MarkdownOptions::default()).unwrap();
+        let tokens = python_parser.parse_str(source);
+        let token_kinds: Vec<_> = tokens.iter().map(|t| t.kind).collect();
+
+        dbg!(&token_kinds);
+        assert!(matches!(
+            token_kinds.as_slice(),
+            &[
+                TokenKind::Word(_), // This
+                TokenKind::Space(_),
+                TokenKind::Word(_), // is
+                TokenKind::Space(_),
+                TokenKind::Word(_), // a
+                TokenKind::Space(_),
+                TokenKind::Word(_), // comment
+            ]
+        ));
+    }
+}

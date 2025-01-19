@@ -106,7 +106,13 @@ impl Masker for TreeSitterMasker {
         let mut mask = Mask::new_blank();
 
         for span in comments_spans {
-            mask.push_allowed(span);
+            // Exclude shebangs
+            if !matches!(
+                span.get_content_string(source).trim_start().get(0..2),
+                Some("#!")
+            ) {
+                mask.push_allowed(span);
+            }
         }
 
         mask.merge_whitespace_sep(source);
