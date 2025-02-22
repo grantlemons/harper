@@ -13,8 +13,8 @@ use harper_core::parsers::{Markdown, MarkdownOptions};
 use harper_core::spell::hunspell::parse_default_attribute_list;
 use harper_core::spell::hunspell::word_list::parse_word_list;
 use harper_core::{
-    remove_overlaps, CharString, CharStringExt, Dictionary, Document, FstDictionary, TokenKind,
-    TokenStringExt, WordMetadata,
+    CharString, CharStringExt, Dictionary, Document, FstDictionary, TokenKind, TokenStringExt,
+    WordMetadata, remove_overlaps,
 };
 use harper_literate_haskell::LiterateHaskellParser;
 use hashbrown::HashMap;
