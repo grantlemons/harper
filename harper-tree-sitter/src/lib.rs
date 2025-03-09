@@ -106,10 +106,7 @@ impl Masker for TreeSitterMasker {
         let mut mask = Mask::new_blank();
 
         for span in comments_spans {
-            let text = span.get_content_string(source);
-            if !(text.contains("spellchecker:ignore") || text.contains("spellchecker: ignore")) {
-                mask.push_allowed(span);
-            }
+            mask.push_allowed(span);
         }
 
         mask.merge_whitespace_sep(source);
