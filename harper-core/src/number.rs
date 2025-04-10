@@ -82,7 +82,7 @@ impl NumberSuffix {
     /// Check the first several characters in a buffer to see if it matches a
     /// number suffix.
     pub fn from_chars(chars: &[char]) -> Option<Self> {
-        if chars.len() < 2 {
+        if chars.len() != 2 {
             return None;
         }
 
