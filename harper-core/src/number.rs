@@ -110,6 +110,7 @@ impl NumberSuffix {
 
 #[cfg(test)]
 mod tests {
+    use itertools::Itertools;
     use ordered_float::OrderedFloat;
 
     use crate::NumberSuffix;
@@ -170,5 +171,11 @@ mod tests {
             .to_string(),
             "15.50"
         )
+    }
+
+    #[test]
+    fn issue_1051() {
+        let word = "story".chars().collect_vec();
+        assert_eq!(None, NumberSuffix::from_chars(&word));
     }
 }
