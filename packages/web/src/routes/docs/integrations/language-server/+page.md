@@ -129,8 +129,14 @@ We _do_ take pull requests or issues for adding words to the static dictionary. 
 - `harper: ignore`
 - `spellcheck:ignore`
 - `spellcheck: ignore`
+- `spell-checker:ignore`
+- `spell-checker: ignore`
+- `spellchecker:ignore`
+- `spellchecker: ignore`
 
-So "spellcheckd" and other spelling or grammar errors will not be flagged in any of the following comments:
+You may notice that the last four ignore comments are the same with some of CSpell's ignore comments. That is intentional in case users wish to use Harper and CSpell together.
+
+Here's an example of how these comments can be used:
 
 ```js
 // harper:ignore this line will not be spellcheckd
@@ -143,14 +149,7 @@ function sample() {
 }
 ```
 
-For CSpell compatibility, we also support these ignore comments:
-
-- `cSpell:ignore`
-- `cSpell: ignore`
-- `spell-checker:ignore`
-- `spell-checker: ignore`
-- `spellchecker:ignore`
-- `spellchecker: ignore`
+In the above example, "spellcheckd", "this this", and other spelling or grammar errors will not be flagged.
 
 ## Configuration
 
