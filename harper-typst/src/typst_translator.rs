@@ -305,7 +305,9 @@ impl<'a> TypstTranslator<'a> {
                         .collect_vec(),
                 )
             }
-            Expr::Content(content_block) => iter_recurse(&mut content_block.body().exprs()),
+            Expr::Content(content_block) => {
+                isolate(iter_recurse(&mut content_block.body().exprs()))
+            }
             Expr::Parenthesized(parenthesized) => recurse!(parenthesized.expr()),
             Expr::Array(array) => Some(
                 array
